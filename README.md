@@ -1,16 +1,12 @@
-# assignment_flutter
+# Internship Assignment on flutter
 
-A new Flutter project.
+## Screenshots
 
-## Getting Started
+- **Login Screen**  
+  <img src="Screenshots/S1.jpeg" alt="Screenshot 1" width="400" height="800">
 
-This project is a starting point for a Flutter application.
+- **Country Code Selection**  
+  <img src="Screenshots/S2.jpeg" alt="Screenshot 2" width="400" height="800">
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+  - **Phone Number Length Validation**  
+  <img src="Screenshots/S3.jpeg" alt="Screenshot 3" width="400" height="800">

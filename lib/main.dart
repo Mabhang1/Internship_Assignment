@@ -1,9 +1,14 @@
+import 'package:assignment_flutter/dash.dart';
+import 'package:assignment_flutter/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:assignment_flutter/colors.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:assignment_flutter/dash.dart';
 
 void main() => runApp(
-  const MaterialApp(
+   MaterialApp(
     home: HomePage(),
     debugShowCheckedModeBanner: false,
   )
@@ -11,10 +16,16 @@ void main() => runApp(
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
+Future<void> initializeDefault() async {
+    FirebaseApp app = await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -86,10 +97,110 @@ class HomePage extends StatelessWidget {
                                 onChanged: (phone) {
                                     print(phone.completeNumber);
                                 },
-                            )
-                          ]),
-                        )
-                      ],
+                            ),
+                          ]
+                          ),
+                        ),
+                        SizedBox(height: 60,),
+                        SizedBox(
+                          height:50,
+                        child:ElevatedButton(
+                          onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only( 
+            topLeft: Radius.circular(25),
+            topRight: Radius.circular(25),
+          ),
+        ),
+            builder: (BuildContext context) {
+              return Container(
+                height: 300,
+                color: Colors.white,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 10), // Add 10 pixels of padding horizontally
+                      child: Text(
+                        'Enter Password',
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                      ),
+                  ),
+                      SizedBox(height: 20),
+                      Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(5),
+                      ),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextFormField(
+                controller: passwordController,
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: 'Password',
+                  contentPadding: EdgeInsets.symmetric(horizontal: 10),
+                  
+                ),
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.visibility),
+              onPressed: () {
+              },
+            ),
+          ],
+        ),
+      ),
+      SizedBox(height: 20),
+                      Center( 
+                      child:ElevatedButton(
+                        child: const Text('Verify Password'),
+                        onPressed: () {
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => dash()),);},
+                          style: ElevatedButton.styleFrom(
+                          backgroundColor: c1,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              )
+                          ),
+                      ),
+                    ),
+                    ],
+                  ),
+                ),
+              );
+            }
+          );
+  },
+child: Padding(
+    padding: EdgeInsets.symmetric(horizontal: 80),
+    child: Text(
+      'Proceed',
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+      ),
+    ),
+  ),
+  style: ElevatedButton.styleFrom(
+    backgroundColor: c1,
+     shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(80),
+        )
+  ),
+  ),
+  )],
                     ),
                   ),
               )
